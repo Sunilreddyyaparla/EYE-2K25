@@ -45,6 +45,17 @@
             color: #2980b9;
             margin-top: 20px;
         }
+        .terms-link {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        .terms-link a {
+            color: #3399cc;
+            text-decoration: none;
+        }
+        .terms-link a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -56,6 +67,10 @@
         </div>
         <button id="rzp-button" class="pay-button">Proceed to Pay</button>
         <div class="loading" id="loading-message">Processing your payment...</div>
+        <div class="terms-link">
+            <P>Before proceeding please read </P>
+            <a href="{{ url_for('terms_and_conditions') }}">Terms and Conditions</a>
+        </div>
     </div>
 
     <script>
@@ -67,7 +82,7 @@
             "description": "Registration for {{ registration_data.event_name }}",
             "order_id": "{{ order_id }}",
             "handler": function (response) {
-                console.log("Payment successful:", response); // Debugging
+                console.log("Payment successful:", response);
                 document.getElementById('loading-message').style.display = 'block';
                 fetch('/payment_callback', {
                     method: 'POST',
